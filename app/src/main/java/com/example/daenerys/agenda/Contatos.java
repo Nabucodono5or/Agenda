@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class Contatos extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     ArrayList<String> arqs = new ArrayList<>();
-    String[] items = {"Orange", "Banana", "Maça"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +40,9 @@ public class Contatos extends AppCompatActivity implements View.OnClickListener,
     }//onCreate
 
 
-
-    public boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
-    }//isExternalStorageWritable
-
     @Override
     public void onClick(View view) {
-
+        //null, usado para teste
     }
 
     @Override

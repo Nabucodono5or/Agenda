@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class agenda extends AppCompatActivity {
     EditText email;
     ArrayList<EditText> entrada;
     ArrayList<String> arq = new ArrayList<>();
+    boolean nenhumContato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +141,7 @@ public class agenda extends AppCompatActivity {
 
 
     public void listar(){
+        nenhumContato = false;
         File root = android.os.Environment.getExternalStorageDirectory();
         File diretorio = new File(root.toString());
         File[] arquivos = diretorio.listFiles();
@@ -152,17 +155,23 @@ public class agenda extends AppCompatActivity {
                 if (f.isFile()) {
 
                     arq.add(f.getName());
-                }//if
+                }//if f
             }//for i
 
-        }//if
+        }else {
+            nenhumContato = true;
+        }
     }//Listar
 
 
     public void onClickContatos(View view){
-        listar();
-        Intent intent = new Intent(this,Contatos.class);
-        intent.putExtra("arquivos",arq);
-        startActivity(intent);
+        if(!nenhumContato) {
+            listar();
+            Intent intent = new Intent(this, Contatos.class);
+            intent.putExtra("arquivos", arq);
+            startActivity(intent);
+        }else {
+            Toast.makeText(this, "Nenhum registro foi encontrado", Toast.LENGTH_LONG).show();
+        }//else
     }//onClickContatos
 }//class
